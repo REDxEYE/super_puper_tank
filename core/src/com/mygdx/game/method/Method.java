@@ -1,19 +1,15 @@
 package com.mygdx.game.method;
 
 import com.mygdx.game.build.Building;
-import com.mygdx.game.main.Main;
-import com.mygdx.game.particle.Particle;
 import com.mygdx.game.soldat.Soldat;
 import com.mygdx.game.transport.Transport;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.StrictMath.atan2;
 import static java.lang.StrictMath.sqrt;
-import static java.sql.Types.NULL;
 
 public class Method {
     public static float tower(double x, double y, double x_2, double y_2, float rotation_tower, float speed_tower) {

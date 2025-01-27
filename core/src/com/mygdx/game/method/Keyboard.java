@@ -4,10 +4,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.mygdx.game.block.Block;
 import com.mygdx.game.build.Building;
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bullet.Bullet;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.menu.button.Button;
-import com.mygdx.game.particle.Particle;
+import com.mygdx.game.particle.ParticleV1;
 import com.mygdx.game.soldat.Soldat;
 import com.mygdx.game.transport.Transport;
 
@@ -140,8 +140,8 @@ public class Keyboard extends InputAdapter{
         return false;
     }
     public void zoom_const(){
-        for(Particle particle : Main.FlameParticleList){
-            particle.size_render = (int)(particle.size* Main.Zoom);
+        for(ParticleV1 particle : Main.FlameParticleList){
+            particle.size_render = (int)(particle.radius * Main.Zoom);
         }
 
         RC.WidthRenderZoom = RC.WidthRender /Main.Zoom;
@@ -171,27 +171,27 @@ public class Keyboard extends InputAdapter{
             building.width_render = (int)(building.width* Main.Zoom);
             building.height_render = (int)(building.height* Main.Zoom);
         }
-        for(Particle particle : Main.FlameList){
-           particle.size_render = (int)(particle.size* Main.Zoom);
+        for(ParticleV1 particle : Main.FlameList){
+           particle.size_render = (int)(particle.radius * Main.Zoom);
         }
-        for(Particle particle : Main.FlameStaticList){
-            particle.size_render = (int)(particle.size* Main.Zoom);
+        for(ParticleV1 particle : Main.FlameStaticList){
+            particle.size_render = (int)(particle.radius * Main.Zoom);
         }
-        for(Particle particle : Main.LiquidList){
-            particle.size_render = (int)(particle.size* Main.Zoom);
+        for(ParticleV1 particle : Main.LiquidList){
+            particle.size_render = (int)(particle.radius * Main.Zoom);
         }
-        for(Particle particle : Main.BangList){
-            particle.size_render = (int)(particle.size* Main.Zoom);
+        for(ParticleV1 particle : Main.BangList){
+            particle.size_render = (int)(particle.radius * Main.Zoom);
         }
-        for(Particle particle : Main.FlameParticleList){
-            particle.size_render = (int)(particle.size* Main.Zoom);
+        for(ParticleV1 particle : Main.FlameParticleList){
+            particle.size_render = (int)(particle.radius * Main.Zoom);
         }
-        for(Particle particle : Main.BangList){
-            particle.size_render = (int)(particle.size* Main.Zoom);
+        for(ParticleV1 particle : Main.BangList){
+            particle.size_render = (int)(particle.radius * Main.Zoom);
         }
 
-        for(Bull bull : Main.BullList){
-            bull.size_render = (int)(bull.size* Main.Zoom);
+        for(Bullet bullet : Main.bulletList){
+            bullet.size_render = (int)(bullet.size* Main.Zoom);
         }
         for(Transport tr : Main.PlayerList){
             tr.corpus_width_zoom = (int)(tr.corpus_width*Main.Zoom);

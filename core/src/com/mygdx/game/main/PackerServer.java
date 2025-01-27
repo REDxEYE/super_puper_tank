@@ -1,7 +1,7 @@
 package com.mygdx.game.main;
 
-import Content.Bull.BullPacket;
-import Content.Soldat.SoldatPacket;
+import com.mygdx.game.content.Bull.BullPacket;
+import com.mygdx.game.content.Soldat.SoldatPacket;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.object_map.PacketMapObject;
 import com.mygdx.game.transport.DebrisPacket;

@@ -1,9 +1,6 @@
 package com.mygdx.game.main;
-import Content.Build.BigBuildingWood1;
-import Content.Build.Home1;
-import Content.Bull.*;
-import Content.Particle.*;
-import Content.Transport.Transport.*;
+import com.mygdx.game.content.Build.BigBuildingWood1;
+import com.mygdx.game.content.Build.Home1;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.esotericsoftware.kryonet.Client;
 
@@ -16,12 +13,15 @@ import com.mygdx.game.block.Block;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
 import com.mygdx.game.build.PacketBuildingServer;
+import com.mygdx.game.content.Bull.*;
+import com.mygdx.game.content.particle.*;
+import com.mygdx.game.content.Transport.Transport.*;
 import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.object_map.ObjectLoad;
 import com.mygdx.game.method.SoundPlay;
-import Content.Soldat.SoldatBull;
-import Content.Soldat.SoldatFlame;
-import Content.Soldat.SoldatPacket;
+import com.mygdx.game.content.Soldat.SoldatBull;
+import com.mygdx.game.content.Soldat.SoldatFlame;
+import com.mygdx.game.content.Soldat.SoldatPacket;
 import com.mygdx.game.object_map.MapObject;
 import com.mygdx.game.object_map.ObjectMapAssets;
 import com.mygdx.game.object_map.PacketMapObject;
@@ -30,10 +30,10 @@ import com.mygdx.game.object_map.component_collision_system.CollisionVoid;
 import com.mygdx.game.transport.*;
 import com.mygdx.game.transport.SpawnPlayer.*;
 
-import static Content.Bull.BullRegister.PacketBull;
+import static com.mygdx.game.content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
-import static Content.Soldat.SoldatRegister.PacketSoldat;
+import static com.mygdx.game.content.Soldat.SoldatRegister.PacketSoldat;
 import static com.mygdx.game.object_map.MapObject.PacketMapObjects;
 import static com.mygdx.game.transport.TransportRegister.*;
 
@@ -65,16 +65,16 @@ public class ClientMain extends Listener{
         Client.getKryo().register(FlameSpawn.class);
         Client.getKryo().register(Flame.class);
         Client.getKryo().register(FlameParticle.class);
-        Client.getKryo().register(Acid.class);
-        Client.getKryo().register(Blood.class);
+        Client.getKryo().register(AcidParticle.class);
+        Client.getKryo().register(BloodParticle.class);
         Client.getKryo().register(FlameStatic.class);
         Client.getKryo().register(BuildPacket.class);
         Client.getKryo().register(BuildType.class);
-        Client.getKryo().register(BullFlame.class);
-        Client.getKryo().register(BullFragment.class);
-        Client.getKryo().register(BullAcid.class);
-        Client.getKryo().register(BullTank.class);
-        Client.getKryo().register(BullMortar.class);
+        Client.getKryo().register(BulletFlame.class);
+        Client.getKryo().register(BulletFragment.class);
+        Client.getKryo().register(BulletAcid.class);
+        Client.getKryo().register(BulletTank.class);
+        Client.getKryo().register(BulletMortar.class);
         Client.getKryo().register(PacketBuildingServer.class);
         Client.getKryo().register(PlayerSpawnData.class);
         Client.getKryo().register(SpawnPlayerCannonFlame.class);
@@ -186,27 +186,27 @@ public class ClientMain extends Listener{
                 KeyboardObj.zoom_const();
             }
             PacketBull = ((PackerServer) p).bull;
-            i = BullList.size();
+            i = bulletList.size();
             for (int i2 = 0; i2 < PacketBull.size(); i2++) {
                 switch (PacketBull.get(i2).type) {
                     case 1:
-                        BullList.add(new BullFlame(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        bulletList.add(new BulletFlame(PacketBull.get(i2).x, PacketBull.get(i2).y,
                             PacketBull.get(i2).rotation, 0.0F, 0.0F, 0, PacketBull.get(i2).team, PacketBull.get(i2).height));
                         break;
                     case 2:
-                        BullList.add(new BullFragment(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        bulletList.add(new BulletFragment(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 0.0F, 0.0f, PacketBull.get(i2).height));break;
 
                     case 3:
-                        BullList.add(new BullMortar(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        bulletList.add(new BulletMortar(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 PacketBull.get(i2).rotation, 0.0f, 0f, 0f, 0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                     case 4:
-                        BullList.add(new BullAcid(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        bulletList.add(new BulletAcid(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 PacketBull.get(i2).rotation, 0.0f, 0.0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                     case 5:
-                        BullList.add(new BullTank(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        bulletList.add(new BulletTank(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 PacketBull.get(i2).rotation, 0.0f, 0.0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                 }
@@ -248,13 +248,13 @@ public class ClientMain extends Listener{
         }
     }
     private void bull_data(int i){
-        BullList.get(this.i).x = PacketBull.get(i).x;
-        BullList.get(this.i).y = PacketBull.get(i).y;
-        BullList.get(this.i).rotation = PacketBull.get(i).rotation;
-        BullList.get(this.i).time = PacketBull.get(i).time;
-        BullList.get(this.i).height = PacketBull.get(i).height;
-        BullList.get(this.i).type = PacketBull.get(i).type;
-        BullList.get(this.i).type_team = PacketBull.get(i).team;
+        bulletList.get(this.i).x = PacketBull.get(i).x;
+        bulletList.get(this.i).y = PacketBull.get(i).y;
+        bulletList.get(this.i).rotation = PacketBull.get(i).rotation;
+        bulletList.get(this.i).time = PacketBull.get(i).time;
+        bulletList.get(this.i).height = PacketBull.get(i).height;
+        bulletList.get(this.i).type = PacketBull.get(i).type;
+        bulletList.get(this.i).type_team = PacketBull.get(i).team;
         this.i += 1;
     }
 

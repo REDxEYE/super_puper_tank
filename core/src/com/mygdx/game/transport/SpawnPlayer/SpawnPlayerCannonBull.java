@@ -1,6 +1,6 @@
 package com.mygdx.game.transport.SpawnPlayer;
 
-import Content.Transport.Transport.PlayerCannonBullTank;
+import com.mygdx.game.content.Transport.Transport.PlayerCannonBullTank;
 import com.mygdx.game.main.Main;
 
 public class SpawnPlayerCannonBull extends PlayerSpawnData{

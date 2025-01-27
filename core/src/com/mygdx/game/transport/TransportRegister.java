@@ -1,6 +1,6 @@
 package com.mygdx.game.transport;
 
-import Content.Transport.Transport.*;
+import com.mygdx.game.content.Transport.Transport.*;
 import com.mygdx.game.main.Main;
 
 import java.util.ArrayList;

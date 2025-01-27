@@ -5,8 +5,8 @@ import com.mygdx.game.main.Main;
 
 
 import com.mygdx.game.method.rand;
-import Content.Particle.FlameStatic;
-import com.mygdx.game.particle.Particle;
+import com.mygdx.game.content.particle.FlameStatic;
+import com.mygdx.game.particle.ParticleV1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public abstract class Building implements Serializable {
     }
 
 
-    public void flame_build(LinkedList<Particle> part){
+    public void flame_build(LinkedList<ParticleV1> part){
         if(this.time_flame>0){
             iteration_light_build();
             for (int[] ints : xy_light_render) {

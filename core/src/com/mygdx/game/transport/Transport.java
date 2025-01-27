@@ -1,16 +1,16 @@
 package com.mygdx.game.transport;
 
-import Content.Bull.*;
-import Content.Soldat.SoldatBull;
-import Content.Soldat.SoldatFlame;
-import Content.Transport.Transport.DebrisTransport;
+import com.mygdx.game.content.Bull.*;
+import com.mygdx.game.content.Soldat.SoldatBull;
+import com.mygdx.game.content.Soldat.SoldatFlame;
+import com.mygdx.game.content.Transport.Transport.DebrisTransport;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.build.Building;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.method.*;
-import Content.Particle.FlameSpawn;
-import Content.Particle.Bang;
+import com.mygdx.game.content.particle.FlameSpawn;
+import com.mygdx.game.content.particle.Bang;
 import com.mygdx.game.soldat.*;
 
 import java.awt.*;
@@ -19,7 +19,7 @@ import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static Content.Bull.BullRegister.PacketBull;
+import static com.mygdx.game.content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.method.Option.SoundConst;
 import static com.mygdx.game.method.pow2.pow2;
@@ -315,13 +315,13 @@ public abstract class Transport{
     }
     protected final void move_xy_transport(){
         float rotation_corpus2 = (float) (-this.rotation_corpus*3.1415/180);
-        this.x += move.move_sin2(this.speed, rotation_corpus2);
-        this.y += move.move_cos2(this.speed, rotation_corpus2);
+        this.x += Move.move_sin2(this.speed, rotation_corpus2);
+        this.y += Move.move_cos2(this.speed, rotation_corpus2);
     }
     protected final void move_xy_transport_bot(){
         float rotation_corpus2 = (float) (-this.rotation_corpus*3.1415/180);
-        this.x -= move.move_sin2(this.speed, rotation_corpus2);
-        this.y -= move.move_cos2(this.speed, rotation_corpus2);
+        this.x -= Move.move_sin2(this.speed, rotation_corpus2);
+        this.y -= Move.move_cos2(this.speed, rotation_corpus2);
     }
     protected final void tower_bot_enemy(int i) {
         if(this.enemyList.size() != 0) {
@@ -372,7 +372,7 @@ public abstract class Transport{
     protected void bot_bull_tank_fire_not_tower(int i){
         if(enemy_fire_not_tower(i)){
             SoundPlay.sound( this.sound_fire,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/200));
-            Main.BullList.add(new BullTank(this.tower_x,this.tower_y,-this.rotation_corpus+180,this.damage,this.penetration,this.team,this.height));
+            Main.bulletList.add(new BulletTank(this.tower_x,this.tower_y,-this.rotation_corpus+180,this.damage,this.penetration,this.team,this.height));
 
         }
     }
@@ -382,10 +382,10 @@ public abstract class Transport{
             SoundPlay.sound( this.sound_fire,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/200));
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
-            Main.BullList.add(new BullTank(this.fire_x,this.fire_y,-this.rotation_tower,this.damage,this.penetration,this.team,this.height));
+            Main.bulletList.add(new BulletTank(this.fire_x,this.fire_y,-this.rotation_tower,this.damage,this.penetration,this.team,this.height));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
-            int i2 = BullList.size()-1;
+            int i2 = bulletList.size()-1;
             bull_packets(i1,i2);
 
         }
@@ -400,11 +400,11 @@ public abstract class Transport{
             SoundPlay.sound( this.sound_fire,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/200));
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
-            Main.BullList.add(new BullMortar(this.fire_x,this.fire_y,-this.rotation_tower+180,this.damage,this.penetration,this.damage_fragment,
+            Main.bulletList.add(new BulletMortar(this.fire_x,this.fire_y,-this.rotation_tower+180,this.damage,this.penetration,this.damage_fragment,
                     this.penetration_fragment,this.team,this.height));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
-            int i2 = BullList.size()-1;
+            int i2 = bulletList.size()-1;
             bull_packets(i1,i2);
 
 
@@ -417,12 +417,12 @@ public abstract class Transport{
             SoundPlay.sound( this.sound_fire,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/200));
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
-            Main.BullList.add(new BullFlame(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20),this.damage,this.t_damage,this.penetration,this.team,this.height));
-            Main.BullList.add(new BullFlame(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20),this.damage,this.t_damage,this.penetration,this.team,this.height));
+            Main.bulletList.add(new BulletFlame(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20),this.damage,this.t_damage,this.penetration,this.team,this.height));
+            Main.bulletList.add(new BulletFlame(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20),this.damage,this.t_damage,this.penetration,this.team,this.height));
             PacketBull.add(new BullPacket());
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-2;
-            int i2 = BullList.size()-2;
+            int i2 = bulletList.size()-2;
             bull_packets(i1,i2);
             bull_packets(i1+1,i2+1);
         }
@@ -433,12 +433,12 @@ public abstract class Transport{
             SoundPlay.sound( this.sound_fire,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/200));
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
-            Main.BullList.add(new BullAcid(this.fire_x,this.fire_y, -this.rotation_tower+ -10+rand.rand(20),  this.damage, this.penetration,this.team,this.height));
-            Main.BullList.add(new BullAcid(this.fire_x,this.fire_y, -this.rotation_tower+ -10+rand.rand(20),  this.damage, this.penetration,this.team,this.height));
+            Main.bulletList.add(new BulletAcid(this.fire_x,this.fire_y, -this.rotation_tower+ -10+rand.rand(20),  this.damage, this.penetration,this.team,this.height));
+            Main.bulletList.add(new BulletAcid(this.fire_x,this.fire_y, -this.rotation_tower+ -10+rand.rand(20),  this.damage, this.penetration,this.team,this.height));
             PacketBull.add(new BullPacket());
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-2;
-            int i2 = BullList.size()-2;
+            int i2 = bulletList.size()-2;
             bull_packets(i1,i2);
             bull_packets(i1+1,i2+1);
         }
@@ -446,11 +446,11 @@ public abstract class Transport{
     private void bull_packets(int i1,int i2){
         PacketBull.get(i1).x = this.fire_x;
         PacketBull.get(i1).y = this.fire_y;
-        PacketBull.get(i1).rotation = BullList.get(i2).rotation;
-        PacketBull.get(i1).time = BullList.get(i2).time;
-        PacketBull.get(i1).speed = BullList.get(i2).speed;
-        PacketBull.get(i1).height = BullList.get(i2).height;
-        PacketBull.get(i1).type = BullList.get(i2).type;
+        PacketBull.get(i1).rotation = bulletList.get(i2).rotation;
+        PacketBull.get(i1).time = bulletList.get(i2).time;
+        PacketBull.get(i1).speed = bulletList.get(i2).speed;
+        PacketBull.get(i1).height = bulletList.get(i2).height;
+        PacketBull.get(i1).type = bulletList.get(i2).type;
         PacketBull.get(i1).team = this.team;
     }
 
@@ -516,11 +516,11 @@ public abstract class Transport{
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
             this.reload = this.reload_max;
-            Main.BullList.add(new BullTank(this.fire_x,this.fire_y,
+            Main.bulletList.add(new BulletTank(this.fire_x,this.fire_y,
                     -this.rotation_tower,this.damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
-            int i2 = BullList.size()-1;
+            int i2 = bulletList.size()-1;
             bull_packets(i1,i2);
         }
     }
@@ -540,14 +540,14 @@ public abstract class Transport{
             this.reload = this.reload_max;
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
-            Main.BullList.add(new BullFlame(this.fire_x,this.fire_y,
+            Main.bulletList.add(new BulletFlame(this.fire_x,this.fire_y,
                     -this.rotation_tower+ -10+rand.rand(20),this.damage,this.t_damage,this.penetration,this.team,(byte)1));
-            Main.BullList.add(new BullFlame(this.fire_x,this.fire_y,
+            Main.bulletList.add(new BulletFlame(this.fire_x,this.fire_y,
                     -this.rotation_tower+ -10+rand.rand(20),this.damage,this.t_damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-2;
-            int i2 = BullList.size()-2;
+            int i2 = bulletList.size()-2;
             bull_packets(i1,i2);
             bull_packets(i1+1,i2+1);
         }
@@ -564,11 +564,11 @@ public abstract class Transport{
             this.reload = this.reload_max;
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
-            Main.BullList.add(new BullMortar(this.fire_x,this.fire_y,
+            Main.bulletList.add(new BulletMortar(this.fire_x,this.fire_y,
                     -rotation_fire,this.damage,this.penetration,this.damage_fragment,this.penetration_fragment,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
-            int i2 = BullList.size()-1;
+            int i2 = bulletList.size()-1;
             bull_packets(i1,i2);
 
 
@@ -586,12 +586,12 @@ public abstract class Transport{
             this.reload = this.reload_max;
             this.fire_x = (float) (this.tower_x+this.tower_width_2+((this.tower_height_2+this.y_tower) *sin(-this.rotation_tower*3.1415926535/180)));
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
-            Main.BullList.add(new BullAcid(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20), this.damage,this.penetration,this.team,(byte)1));
-            Main.BullList.add(new BullAcid(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20), this.damage,this.penetration,this.team,(byte)1));
+            Main.bulletList.add(new BulletAcid(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20), this.damage,this.penetration,this.team,(byte)1));
+            Main.bulletList.add(new BulletAcid(this.fire_x,this.fire_y,-this.rotation_tower+ -10+rand.rand(20), this.damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-2;
-            int i2 = BullList.size()-2;
+            int i2 = bulletList.size()-2;
             bull_packets(i1,i2);
             bull_packets(i1+1,i2+1);
         }
@@ -758,8 +758,8 @@ public abstract class Transport{
                 this.speed -=this.acceleration;
             }
         }
-        this.x -= move.move_sin(this.speed, -this.rotation_corpus);
-        this.y -= move.move_cos(this.speed, -this.rotation_corpus);
+        this.x -= Move.move_sin(this.speed, -this.rotation_corpus);
+        this.y -= Move.move_cos(this.speed, -this.rotation_corpus);
     }
     private void rotation_bot(float g) {
 
@@ -811,8 +811,8 @@ public abstract class Transport{
                 this.speed -=this.acceleration;
             }
         }
-        this.x -= move.move_sin(this.speed, -this.rotation_corpus);
-        this.y -= move.move_cos(this.speed, -this.rotation_corpus);
+        this.x -= Move.move_sin(this.speed, -this.rotation_corpus);
+        this.y -= Move.move_cos(this.speed, -this.rotation_corpus);
     }
 
     private void bypass_build(ArrayList<Building> obj_building, ArrayList<Transport> obj_tr, float g, int i3, int i2) {
@@ -1367,8 +1367,8 @@ public abstract class Transport{
         }
     }
     protected void move_debris(){
-        this.x += move.move_sin(this.speed,-this.rotation_corpus);
-        this.y += move.move_cos(this.speed,-this.rotation_corpus);
+        this.x += Move.move_sin(this.speed,-this.rotation_corpus);
+        this.y += Move.move_cos(this.speed,-this.rotation_corpus);
         if(this.speed<0){
             this.speed +=this.acceleration;
             if(this.speed >-this.acceleration &&this.speed <this.acceleration){
@@ -1383,8 +1383,8 @@ public abstract class Transport{
         }
     }
     protected void inertia_xy() {
-        this.x += move.move_sin(this.speed_inert,-this.rotation_inert);
-        this.y += move.move_cos(this.speed_inert,-this.rotation_inert);
+        this.x += Move.move_sin(this.speed_inert,-this.rotation_inert);
+        this.y += Move.move_cos(this.speed_inert,-this.rotation_inert);
         if (this.speed_inert > 0.1) {
             this.speed_inert -= this.acceleration;
             if (this.speed_inert < acceleration && this.speed_inert > -acceleration) {

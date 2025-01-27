@@ -1,15 +1,9 @@
 package com.mygdx.game.menu.button.ButtonTank;
 
-import Content.Transport.Transport.PlayerCannonMortar;
-import com.mygdx.game.MapFunction.MapScan;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.menu.button.Button;
-import com.mygdx.game.menu.button.Maps;
-import com.mygdx.game.transport.SpawnPlayer.SpawnPlayerCannonFlame;
-import com.mygdx.game.transport.SpawnPlayer.SpawnPlayerCannonMortar;
 
 import static com.mygdx.game.main.Main.KeyboardObj;
-import static com.mygdx.game.main.Main.PlayerList;
 import static com.mygdx.game.transport.SpawnPlayer.PlayerSpawnListData.*;
 
 public class TankChoice extends Button {

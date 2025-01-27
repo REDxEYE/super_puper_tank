@@ -1,6 +1,6 @@
 package com.mygdx.game.transport.SpawnPlayer;
 
-import Content.Transport.Transport.PlayerCannonFlame;
+import com.mygdx.game.content.Transport.Transport.PlayerCannonFlame;
 import com.mygdx.game.main.Main;
 
 public class SpawnPlayerCannonFlame extends PlayerSpawnData{

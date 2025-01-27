@@ -1,6 +1,6 @@
 package com.mygdx.game.transport.SpawnPlayer;
 
-import Content.Transport.Transport.PlayerCannonAcid;
+import com.mygdx.game.content.Transport.Transport.PlayerCannonAcid;
 import com.mygdx.game.main.Main;
 
 public class SpawnPlayerCannonAcid extends PlayerSpawnData{

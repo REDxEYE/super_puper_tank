@@ -1,12 +1,10 @@
 package com.mygdx.game.MapFunction;
 
-import Content.Build.BigBuildingWood1;
+import com.mygdx.game.content.Build.BigBuildingWood1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
-import com.mygdx.game.object_map.MapObject;
-import com.mygdx.game.object_map.ObjectLoad;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

@@ -1,8 +1,6 @@
 package com.mygdx.game.main;
-import Content.Bull.*;
-import Content.Particle.*;
-import Content.Transport.Transport.PlayerCannonFlame;
-import com.esotericsoftware.kryonet.Client;
+import com.mygdx.game.content.Bull.*;
+import com.mygdx.game.content.particle.*;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
@@ -11,13 +9,13 @@ import com.mygdx.game.build.BuildType;
 import com.mygdx.game.build.PacketBuildingServer;
 import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.SoundPlay;
-import Content.Soldat.SoldatBull;
-import Content.Soldat.SoldatFlame;
-import Content.Soldat.SoldatPacket;
+import com.mygdx.game.content.Soldat.SoldatBull;
+import com.mygdx.game.content.Soldat.SoldatFlame;
+import com.mygdx.game.content.Soldat.SoldatPacket;
 import com.mygdx.game.object_map.ObjectMapAssets;
 import com.mygdx.game.object_map.PacketMapObject;
 import com.mygdx.game.transport.DebrisPacket;
-import Content.Transport.Transport.DebrisTransport;
+import com.mygdx.game.content.Transport.Transport.DebrisTransport;
 import com.mygdx.game.transport.SpawnPlayer.*;
 import com.mygdx.game.transport.TransportPacket;
 import com.mygdx.game.transport.UnitType;
@@ -25,10 +23,8 @@ import com.mygdx.game.transport.UnitType;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.method.Keyboard.ZoomConstTransport;
-import static com.mygdx.game.transport.SpawnPlayer.PlayerSpawnListData.PlayerSpawnCannonVoid;
 
 public class ServerMain extends Listener {
     static Server Server;
@@ -57,17 +53,17 @@ public class ServerMain extends Listener {
         Server.getKryo().register(FlameSpawn.class);
         Server.getKryo().register(Flame.class);
         Server.getKryo().register(FlameParticle.class);
-        Server.getKryo().register(Acid.class);
-        Server.getKryo().register(Blood.class);
+        Server.getKryo().register(AcidParticle.class);
+        Server.getKryo().register(BloodParticle.class);
         Server.getKryo().register(FlameStatic.class);
         Server.getKryo().register(BuildPacket.class);
         Server.getKryo().register(BuildType.class);
 
-        Server.getKryo().register(BullFlame.class);
-        Server.getKryo().register(BullFragment.class);
-        Server.getKryo().register(BullAcid.class);
-        Server.getKryo().register(BullTank.class);
-        Server.getKryo().register(BullMortar.class);
+        Server.getKryo().register(BulletFlame.class);
+        Server.getKryo().register(BulletFragment.class);
+        Server.getKryo().register(BulletAcid.class);
+        Server.getKryo().register(BulletTank.class);
+        Server.getKryo().register(BulletMortar.class);
         Server.getKryo().register(PacketBuildingServer.class);
         Server.getKryo().register(PlayerSpawnData.class);
         Server.getKryo().register(SpawnPlayerCannonFlame.class);

@@ -1,6 +1,6 @@
 package com.mygdx.game.transport.SpawnPlayer;
 
-import Content.Transport.Transport.PlayerCannonMortar;
+import com.mygdx.game.content.Transport.Transport.PlayerCannonMortar;
 import com.mygdx.game.main.Main;
 
 public class SpawnPlayerCannonMortar extends PlayerSpawnData{
